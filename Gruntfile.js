@@ -15,11 +15,11 @@ module.exports = function(grunt) {
     },
     concat: {
       options: {
-        separator: ';',
-        stripBanners: true
+        separator: ' ',
+        stripBanners: false
       },
       dist: {
-        src: ['node_modules/jquery/dist/jquery.min.js','scripts/main.js'],
+        src: ['./node_modules/jquery/dist/jquery.js','scripts/main.js'],
         dest: 'dist/js/lean-mobile-ui.js',
       },
     },

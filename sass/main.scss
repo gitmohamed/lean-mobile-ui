@@ -1,94 +1,46 @@
 /* ANIMATIONS */
 
-@keyframes menuSlide {
+@-webkit-keyframes menuIn {
   from {
     opacity: 0;
-    left: -10%;
+    transform: scale(2);
   }
   to {
     opacity: 1;
-    left: 0;
+    transform: scale(1);
   }
 }
 
-@-webkit-keyframes menuSlide {
+@-webkit-keyframes shrink {
   from {
-    opacity: 0;
-    left: -10%;
+    // opacity: 1;
+    transform: scale(1);
   }
   to {
-    opacity: 1;
-    left: 0;
-  }
-}
-
-@-moz-keyframes menuSlide {
-  from {
-    opacity: 0;
-    left: -10%;
-  }
-  to {
-    opacity: 1;
-    left: 0;
-  }
-}
-
-@keyframes menuSlideBack {
-  from {
-    opacity: 1;
-    left: 0;
-  }
-  to {
-    opacity: 0;
-    left: -10%;
-  }
-}
-
-@-webkit-keyframes menuSlideBack {
-  from {
-    opacity: 1;
-    left: 0;
-  }
-  to {
-    opacity: 0;
-    left: -10%;
-  }
-}
-
-@-moz-keyframes menuSlideBack {
-  from {
-    opacity: 1;
-    left: 0;
-  }
-  to {
-    opacity: 0;
-    left: -10%;
+    // opacity: 0;
+    transform: scale(0);
   }
 }
 
 /* FONTS */
 
-@font-face {
-  src: url('../../fonts/Quicksand-Light.ttf');
-  font-family: Quicksand;
-  font-weight: Light;
-}
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-@font-face {
-  src: url('../../fonts/Quicksand-Regular.ttf');
-  font-family: Quicksand;
-  font-weight: Regular;
-}
+// @font-face {
+//   src: url('../../fonts/Montserrat__.ttf');
+//   font-family: Montserrat;
+//   font-weight: Regular;
+// }
 
 /* ============================= VARIABLES ============================= */
 
 
 $dark: #111;
-$grey: #2d2d2d;
+$dark-opac: #2d2d2d;
 $light: #f2f2f2;
-$light-opac: rgba(242, 242, 242, 0.4);
+$light-opac: rgba(242, 242, 242, 0.8);
 $main-color: #FF2851;
-$font-stack: Quicksand, sans-serif;
+$font-stack: 'Montserrat', sans-serif;
 
 
 /* ============================= TAXONOMY ============================= */
@@ -100,7 +52,7 @@ html {
 body {
   color: $dark;
   font-family: $font-stack;
-  background: $grey;
+  background: $dark-opac;
   margin: 0;
   padding: 0;
 }
@@ -135,6 +87,7 @@ a {
   transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
+  text-overflow: ellipsis;
 }
 
 /* ============================= HEADER ============================= */
@@ -146,14 +99,14 @@ header {
   display: inline-block;
   background: $dark;
   color: $light;
-  border-bottom: 1px solid $grey;
+  border-bottom: 1px solid $dark-opac;
   z-index: 99;
 
   .brand {
     width: auto;
     float: left;
     padding: 10px;
-    border-right: 1px solid $grey;
+    border-right: 1px solid $dark-opac;
   }
 }
 .menu-icon {
@@ -161,42 +114,38 @@ header {
   float: right;
   padding: 12.5px;
   cursor: pointer;
-  border-left: 1px solid $grey;
+  border-left: 1px solid $dark-opac;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
-
 }
 nav {
     float: right;
     display: inline-block;
     font-size: 23px;
+    .exit-btn {
+      display: none;
+    }
   ul {
     li {
       float: left;
       padding: 11px;
       font-size: 17px;
-      border-left: 1px solid $grey;
+      border-left: 1px solid $dark-opac;
     }
   }
 }
 
-nav.clicked {
-  left: 0;
-  opacity: 1;
-  display: block;
-  top: 54px;
-  animation: menuSlide 0.3s ease-in-out 1;
-}
-nav.anti-clicked {
-  left: -10%;
-  opacity: 0;
-  display: block;
-  top: 54px;
-  animation: menuSlideBack 0.3s ease-in-out 1;
+/* ============================= CONTENT ============================= */
+
+.hero {
+
 }
 
-/* ============================= CONTENT ============================= */
+section {
+  width: 100%;
+  display: inline-block;
+}
 
 .container {
   max-width: 90%;
@@ -208,13 +157,13 @@ article, .content {
 }
 
 .card {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   background: $dark;
   color: $light;
-  border: 1px solid $grey;
-  border-radius: 5px;
-  padding: 20px;
+  border: 1px solid $dark-opac;
+  border-radius: 4px;
+  padding: 10px;
 }
 
 /* ============================= FOOTER ============================= */
@@ -228,10 +177,9 @@ footer {
   color: $light;
 
 .copy {
-    font-weight: light;
     text-align: center;
     font-size: small;
-    color:grey;
+    color:$light-opac;
     width: 100%;
     padding: 3px;
   }
@@ -240,7 +188,7 @@ footer {
 /* ============================= GRID ============================= */
 
 .row {
-    display: inline-block;
+    display: table;
     width: 100%;
 
     .grid-1 {
@@ -292,30 +240,65 @@ footer {
     position: fixed;
     bottom:0;
   }
+  .menuIn {
+    display: block;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    animation: menuIn 0.38s cubic-bezier(0.52, 0.07, 0.12, 1.40) 1;
+    // animation-delay: 0.1s;
+  }
+  .shrink {
+    animation: shrink .33s cubic-bezier(0.49, -0.7, 0.8, 0.4) 1;
+    // opacity: 0 !important;
+    transform: scale(0) !important;
+  }
   nav {
     display: none;
-    width: 100%;
-    font-size: 15px;
-    position: absolute;
-    left: -10%;
-    top: 54px;
+    transform: scale(2);
     opacity: 0;
-    background: $dark;
-    border-bottom: 1px solid $grey;
-    animation: menuSlideBack 0.3s ease-in-out 1;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+    font-size: 13px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    color: $light;
+    background: rgba(14,14,14,0.6);
+    border-bottom: 1px solid $dark-opac;
+    .exit-btn {
+      display: block;
+      width: 100%;
+      font-size: 47px;
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+      z-index: 99;
+      background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+      color: $light-opac;
+      text-align: center;
+      padding: 10px;
+    }
+    .menu-set {
+      width: 100%;
+      margin-bottom: 75px;
+    }
     ul {
       li {
         float: none;
         width: 100%;
-        padding: 10px;
-        padding-left: 20px;
-        margin: 0;
+        padding: 20px;
+        padding-left: 30px;
+        margin: 0 auto;
         cursor: pointer;
-        border-bottom: 1px solid $grey;
+        border-bottom: 1px solid $dark-opac;
       }
       li:hover {
         background: $light;
-        color: $grey;
+        color: $dark-opac;
       }
     }
   }

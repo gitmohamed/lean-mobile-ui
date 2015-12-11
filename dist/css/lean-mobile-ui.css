@@ -1,69 +1,20 @@
 /* ANIMATIONS */
-@keyframes menuSlide {
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@-webkit-keyframes menuIn {
   from {
     opacity: 0;
-    left: -10%; }
-
+    transform: scale(2); }
   to {
     opacity: 1;
-    left: 0; } }
+    transform: scale(1); } }
 
-@-webkit-keyframes menuSlide {
+@-webkit-keyframes shrink {
   from {
-    opacity: 0;
-    left: -10%; }
-
+    transform: scale(1); }
   to {
-    opacity: 1;
-    left: 0; } }
-
-@-moz-keyframes menuSlide {
-  from {
-    opacity: 0;
-    left: -10%; }
-
-  to {
-    opacity: 1;
-    left: 0; } }
-
-@keyframes menuSlideBack {
-  from {
-    opacity: 1;
-    left: 0; }
-
-  to {
-    opacity: 0;
-    left: -10%; } }
-
-@-webkit-keyframes menuSlideBack {
-  from {
-    opacity: 1;
-    left: 0; }
-
-  to {
-    opacity: 0;
-    left: -10%; } }
-
-@-moz-keyframes menuSlideBack {
-  from {
-    opacity: 1;
-    left: 0; }
-
-  to {
-    opacity: 0;
-    left: -10%; } }
+    transform: scale(0); } }
 
 /* FONTS */
-@font-face {
-  src: url('../../fonts/Quicksand-Light.ttf');
-  font-family: Quicksand;
-  font-weight: Light; }
-
-@font-face {
-  src: url('../../fonts/Quicksand-Regular.ttf');
-  font-family: Quicksand;
-  font-weight: Regular; }
-
 /* ============================= VARIABLES ============================= */
 /* ============================= TAXONOMY ============================= */
 html {
@@ -71,7 +22,7 @@ html {
 
 body {
   color: #111;
-  font-family: Quicksand, sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: #2d2d2d;
   margin: 0;
   padding: 0; }
@@ -83,7 +34,12 @@ ul {
     list-style: none;
     margin: 0; }
 
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
   margin: 0; }
 
 a {
@@ -96,7 +52,8 @@ a {
   -moz-box-sizing: border-box;
   transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease; }
+  -moz-transition: all 0.3s ease;
+  text-overflow: ellipsis; }
 
 /* ============================= HEADER ============================= */
 header {
@@ -128,39 +85,31 @@ nav {
   float: right;
   display: inline-block;
   font-size: 23px; }
+  nav .exit-btn {
+    display: none; }
   nav ul li {
     float: left;
     padding: 11px;
     font-size: 17px;
     border-left: 1px solid #2d2d2d; }
 
-nav.clicked {
-  left: 0;
-  opacity: 1;
-  display: block;
-  top: 54px;
-  animation: menuSlide 0.3s ease-in-out 1; }
-
-nav.anti-clicked {
-  left: -10%;
-  opacity: 0;
-  display: block;
-  top: 54px;
-  animation: menuSlideBack 0.3s ease-in-out 1; }
-
 /* ============================= CONTENT ============================= */
+section {
+  width: 100%;
+  display: inline-block; }
+
 .container {
   max-width: 90%;
   margin: 0 auto; }
 
 .card {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   background: #111;
   color: #f2f2f2;
   border: 1px solid #2d2d2d;
-  border-radius: 5px;
-  padding: 20px; }
+  border-radius: 4px;
+  padding: 10px; }
 
 /* ============================= FOOTER ============================= */
 footer {
@@ -171,16 +120,15 @@ footer {
   background: #111;
   color: #f2f2f2; }
   footer .copy {
-    font-weight: light;
     text-align: center;
     font-size: small;
-    color: grey;
+    color: rgba(242, 242, 242, 0.8);
     width: 100%;
     padding: 3px; }
 
 /* ============================= GRID ============================= */
 .row {
-  display: inline-block;
+  display: table;
   width: 100%; }
   .row .grid-1 {
     float: left;
@@ -217,23 +165,52 @@ footer {
   footer {
     position: fixed;
     bottom: 0; }
+  .menuIn {
+    display: block;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    animation: menuIn 0.38s cubic-bezier(0.52, 0.07, 0.12, 1.4) 1; }
+  .shrink {
+    animation: shrink 0.33s cubic-bezier(0.49, -0.7, 0.8, 0.4) 1;
+    transform: scale(0) !important; }
   nav {
     display: none;
-    width: 100%;
-    font-size: 15px;
-    position: absolute;
-    left: -10%;
-    top: 54px;
+    transform: scale(2);
     opacity: 0;
-    background: #111;
-    border-bottom: 1px solid #2d2d2d;
-    animation: menuSlideBack 0.3s ease-in-out 1; }
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+    font-size: 13px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    color: #f2f2f2;
+    background: rgba(14, 14, 14, 0.6);
+    border-bottom: 1px solid #2d2d2d; }
+    nav .exit-btn {
+      display: block;
+      width: 100%;
+      font-size: 47px;
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+      z-index: 99;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: rgba(242, 242, 242, 0.8);
+      text-align: center;
+      padding: 10px; }
+    nav .menu-set {
+      width: 100%;
+      margin-bottom: 75px; }
     nav ul li {
       float: none;
       width: 100%;
-      padding: 10px;
-      padding-left: 20px;
-      margin: 0;
+      padding: 20px;
+      padding-left: 30px;
+      margin: 0 auto;
       cursor: pointer;
       border-bottom: 1px solid #2d2d2d; }
     nav ul li:hover {
