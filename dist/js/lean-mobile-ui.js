@@ -9219,6 +9219,12 @@ return jQuery;
     // Main page animations
     if ($(window).width() <= 700) {
 
+      $(window).scroll(function(){
+        var scroll = $(window).scrollTop();
+        // console.log(scroll);
+        $('.mobile-hero-header').css({'opacity': (-1 * (scroll / 100) + 1)});
+      });
+
       $('nav ul li').css({ 'opacity': 0 });
 
       $('.menu-icon').click(function(){
